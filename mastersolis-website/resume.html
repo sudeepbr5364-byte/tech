@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder - Mastersolis Infotech</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .resume-builder-container { max-width: 900px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.08); padding: 32px; }
+        .resume-form { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .resume-preview { background: #f8fafc; border-radius: 8px; padding: 24px; margin-top: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+        .template-select { margin-bottom: 24px; }
+        .ai-suggestions { background: #e0f2fe; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+        .score-bar { background: #e5e7eb; border-radius: 8px; height: 24px; margin: 16px 0; position: relative; }
+        .score-fill { background: #10b981; height: 100%; border-radius: 8px; transition: width 0.5s; }
+        .score-label { position: absolute; left: 50%; top: 0; transform: translateX(-50%); font-weight: 600; color: #111; }
+        .resume-actions { display: flex; gap: 16px; margin-top: 24px; }
+        .job-match { color: #7c3aed; font-weight: 600; margin-top: 8px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">Mastersolis<span>Infotech</span></a>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./services.html">Services</a></li>
+                    <li><a href="./projects.html">Projects</a></li>
+                    <li><a href="./contacts.html">Contact</a></li>
+                    <li><a href="./resume.html" class="active">Resume Builder</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="page-hero">
+        <div class="container">
+            <h1>Resume Builder</h1>
+            <p>Create a professional resume with smart AI suggestions and interactive design.</p>
+        </div>
+    </section>
+    <section>
+        <div class="resume-builder-container">
+            <div class="template-select">
+                <label for="template">Template Style:</label>
+                <select id="template">
+                    <option value="professional">Professional</option>
+                    <option value="personal">Personal</option>
+                    <option value="ats">ATS-Friendly</option>
+                    <option value="creative">Creative</option>
+                </select>
+            </div>
+            <form class="resume-form" id="resumeForm">
+                <div>
+                    <h3>Personal Details</h3>
+                    <input type="text" id="name" placeholder="Full Name" required><br>
+                    <input type="email" id="email" placeholder="Email" required><br>
+                    <input type="text" id="phone" placeholder="Phone" required><br>
+                    <input type="text" id="location" placeholder="Location" required><br>
+                </div>
+                <div>
+                    <h3>Job Role</h3>
+                    <select id="jobRole" required>
+                        <option value="">Select Job Role</option>
+                        <option value="Software Engineer">Software Engineer</option>
+                        <option value="Data Scientist">Data Scientist</option>
+                        <option value="Product Manager">Product Manager</option>
+                        <option value="AI Engineer">AI Engineer</option>
+                        <option value="Web Developer">Web Developer</option>
+                        <option value="Mobile Developer">Mobile Developer</option>
+                        <option value="Cloud Architect">Cloud Architect</option>
+                        <option value="DevOps Engineer">DevOps Engineer</option>
+                        <option value="Business Analyst">Business Analyst</option>
+                        <option value="UI/UX Designer">UI/UX Designer</option>
+                        <option value="QA Engineer">QA Engineer</option>
+                        <option value="Project Manager">Project Manager</option>
+                        <option value="Database Administrator">Database Administrator</option>
+                        <option value="Cybersecurity Specialist">Cybersecurity Specialist</option>
+                    </select><br>
+                    <div class="ai-suggestions" id="aiSuggestions">Smart suggestions for skills and achievements will appear here.</div>
+                </div>
+                <div style="grid-column:1/3;">
+                    <h3>Skills</h3>
+                    <select id="skills" multiple required style="height:140px; border:2px solid #2563eb; border-radius:6px; background:#f8fafc;">
+                        <option value="Python">Python</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="React">React</option>
+                        <option value="Node.js">Node.js</option>
+                        <option value="SQL">SQL</option>
+                        <option value="R">R</option>
+                        <option value="TensorFlow">TensorFlow</option>
+                        <option value="Machine Learning">Machine Learning</option>
+                        <option value="Leadership">Leadership</option>
+                        <option value="Agile">Agile</option>
+                        <option value="Roadmapping">Roadmapping</option>
+                        <option value="Stakeholder Management">Stakeholder Management</option>
+                        <option value="AWS">AWS</option>
+                        <option value="Azure">Azure</option>
+                        <option value="Google Cloud">Google Cloud</option>
+                        <option value="DevOps">DevOps</option>
+                        <option value="UI/UX Design">UI/UX Design</option>
+                        <option value="Project Management">Project Management</option>
+                        <option value="Database Management">Database Management</option>
+                        <option value="Cybersecurity">Cybersecurity</option>
+                        <option value="Docker">Docker</option>
+                        <option value="Kubernetes">Kubernetes</option>
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="TypeScript">TypeScript</option>
+                        <option value="Vue.js">Vue.js</option>
+                        <option value="Java">Java</option>
+                        <option value="C++">C++</option>
+                        <option value="Swift">Swift</option>
+                        <option value="Kotlin">Kotlin</option>
+                        <option value="PHP">PHP</option>
+                        <option value="Go">Go</option>
+                        <option value="Ruby">Ruby</option>
+                        <option value="SAS">SAS</option>
+                        <option value="Tableau">Tableau</option>
+                        <option value="Power BI">Power BI</option>
+                        <option value="ETL">ETL</option>
+                        <option value="NLP">NLP</option>
+                        <option value="Computer Vision">Computer Vision</option>
+                        <option value="Cloud Migration">Cloud Migration</option>
+                        <option value="Microservices">Microservices</option>
+                        <option value="API Development">API Development</option>
+                    </select><br>
+                    <div style="font-size:0.95rem; color:#444; margin-bottom:8px;">
+                        <i class="fas fa-info-circle" style="color:#2563eb;"></i> Hold <strong>Ctrl</strong> (Windows) or <strong>Command</strong> (Mac) to select multiple skills.
+                    </div>
+                    <h3>Achievements</h3>
+                    <textarea id="achievements" placeholder="List your achievements" rows="3"></textarea>
+                </div>
+                <div style="grid-column:1/3;">
+                    <h3>Experience</h3>
+                    <textarea id="experience" placeholder="Describe your work experience" rows="4"></textarea>
+                </div>
+                <div style="grid-column:1/3;">
+                    <h3>Education</h3>
+                    <textarea id="education" placeholder="Your education details" rows="2"></textarea>
+                </div>
+                <div style="grid-column:1/3;">
+                    <h3>Certifications</h3>
+                    <div id="certifications-list"></div>
+                    <button type="button" class="btn" id="addCertification" style="margin-top:8px;margin-bottom:8px;">+ Add Certification</button>
+                </div>
+            </form>
+            <div class="resume-actions">
+                <button class="btn" id="downloadResume"><i class="fas fa-download"></i> Download PDF</button>
+                <button class="btn btn-secondary" id="submitResume"><i class="fas fa-paper-plane"></i> Submit to Job Openings</button>
+            </div>
+            <div class="job-match" id="jobMatch">Job Match: <span id="matchPercent">--%</span></div>
+            <div class="score-bar"><div class="score-fill" id="scoreFill" style="width:0%"></div><span class="score-label" id="scoreLabel">Score: --</span></div>
+            <div class="resume-preview" id="resumePreview">
+                <!-- Live resume preview will appear here -->
+            </div>
+        </div>
+    </section>
+    <footer>
+        <!-- Same footer as other pages -->
+    </footer>
+    <script src="../js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+    <script>
+    // Require authentication for resume builder using index.html credentials
+    function isUserSignedIn() {
+        // Use the same key as index.html for user authentication
+        // Example: localStorage.getItem('msi_user') contains user info if signed in
+        const user = localStorage.getItem('msi_user');
+        return !!user;
+    }
+    function showLoginPrompt() {
+        document.body.innerHTML = `
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;">
+                <h2 style="color:#e11d48;">Sign In Required</h2>
+                <p>You must be signed in to access the Resume Builder.</p>
+                <a href="/admin/login.html" class="btn" style="margin-top:16px;">Go to Login</a>
+            </div>
+        `;
+    }
+    if (!isUserSignedIn()) {
+        showLoginPrompt();
+    } else {
+        // Simulated LLM/AI suggestions for skills and achievements
+        const jobRoleSuggestions = {
+            'Software Engineer': {
+                skills: ['Python', 'JavaScript', 'React', 'Node.js', 'SQL'],
+                achievements: ['Built scalable web apps', 'Optimized backend performance', 'Led agile teams']
+            },
+            'Data Scientist': {
+                skills: ['Python', 'R', 'Machine Learning', 'TensorFlow', 'SQL'],
+                achievements: ['Developed predictive models', 'Published research papers', 'Improved data pipelines']
+            },
+            'Product Manager': {
+                skills: ['Leadership', 'Agile', 'Roadmapping', 'Stakeholder Management'],
+                achievements: ['Launched new products', 'Managed cross-functional teams', 'Increased market share']
+            }
+            // Add more roles as needed
+        };
+
+        function getAISuggestions(role) {
+            const s = jobRoleSuggestions[role] || null;
+            if (!s) return 'Enter a common job role for smart suggestions.';
+            return `<strong>Skills:</strong> ${s.skills.join(', ')}<br><strong>Achievements:</strong> ${s.achievements.join(', ')}`;
+        }
+
+        document.getElementById('jobRole').addEventListener('change', function() {
+            const val = this.value;
+            document.getElementById('aiSuggestions').innerHTML = getAISuggestions(val);
+        });
+
+        // Live resume preview
+        function updatePreview() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const location = document.getElementById('location').value;
+            const jobRole = document.getElementById('jobRole').value;
+            const skillsSelect = document.getElementById('skills');
+            const skills = Array.from(skillsSelect.selectedOptions).map(opt => opt.value).join(', ');
+            const achievements = document.getElementById('achievements').value;
+            const experience = document.getElementById('experience').value;
+            const education = document.getElementById('education').value;
+            const template = document.getElementById('template').value;
+            let previewHTML = '';
+            if (template === 'professional') {
+                previewHTML = `
+                    <div style="font-family: 'Segoe UI', Arial, sans-serif; color:#222;">
+                        <h2 style='border-bottom:2px solid #2563eb;'>${name}</h2>
+                        <p><strong>Email:</strong> ${email} | <strong>Phone:</strong> ${phone} | <strong>Location:</strong> ${location}</p>
+                        <h3 style='color:#2563eb;'>${jobRole}</h3>
+                        <p><strong>Skills:</strong> ${skills}</p>
+                        <p><strong>Achievements:</strong> ${achievements}</p>
+                        <h4>Experience</h4>
+                        <p>${experience}</p>
+                        <h4>Education</h4>
+                        <p>${education}</p>
+                    </div>
+                `;
+            } else if (template === 'personal') {
+                previewHTML = `
+                    <div style="font-family: 'Georgia', serif; color:#444;">
+                        <h2 style='color:#7c3aed;'>${name}</h2>
+                        <p><strong>Email:</strong> ${email} | <strong>Phone:</strong> ${phone} | <strong>Location:</strong> ${location}</p>
+                        <h3>${jobRole}</h3>
+                        <p><strong>Skills:</strong> ${skills}</p>
+                        <p><strong>Achievements:</strong> ${achievements}</p>
+                        <h4>Experience</h4>
+                        <p>${experience}</p>
+                        <h4>Education</h4>
+                        <p>${education}</p>
+                    </div>
+                `;
+            } else if (template === 'ats') {
+                previewHTML = `
+                    <div style="font-family: Arial, sans-serif; color:#111; background:#fff;">
+                        <h2 style='font-size:1.5rem; margin-bottom:0.5rem;'>${name}</h2>
+                        <p>Email: ${email} | Phone: ${phone} | Location: ${location}</p>
+                        <h3 style='font-size:1.1rem; margin-top:1rem;'>${jobRole}</h3>
+                        <p>Skills: ${skills}</p>
+                        <p>Achievements: ${achievements}</p>
+                        <h4>Experience</h4>
+                        <p>${experience}</p>
+                        <h4>Education</h4>
+                        <p>${education}</p>
+                    </div>
+                `;
+            } else if (template === 'creative') {
+                previewHTML = `
+                    <div style="font-family: cursive; color:#2563eb;">
+                        <h2 style='font-size:2.2rem;'>${name}</h2>
+                        <p><strong>Email:</strong> ${email} | <strong>Phone:</strong> ${phone} | <strong>Location:</strong> ${location}</p>
+                        <h3>${jobRole}</h3>
+                        <p><strong>Skills:</strong> ${skills}</p>
+                        <p><strong>Achievements:</strong> ${achievements}</p>
+                        <h4>Experience</h4>
+                        <p>${experience}</p>
+                        <h4>Education</h4>
+                        <p>${education}</p>
+                    </div>
+                `;
+            }
+            document.getElementById('resumePreview').innerHTML = previewHTML;
+        }
+        document.querySelectorAll('#resumeForm input, #resumeForm textarea, #resumeForm select, #template').forEach(el => {
+            el.addEventListener('input', updatePreview);
+            el.addEventListener('change', updatePreview);
+        });
+        updatePreview();
+
+        // Download as PDF
+        document.getElementById('downloadResume').addEventListener('click', function() {
+            html2pdf().from(document.getElementById('resumePreview')).save('resume.pdf');
+        });
+
+        // Simulated job match and AI scoring
+        function calculateScore() {
+            const skillsSelect = document.getElementById('skills');
+            const skills = Array.from(skillsSelect.selectedOptions).map(opt => opt.value);
+            const achievements = document.getElementById('achievements').value.split(',').map(s=>s.trim()).filter(Boolean);
+            const experience = document.getElementById('experience').value.trim();
+            let score = skills.length * 10 + achievements.length * 8 + (experience ? 15 : 0);
+            score = Math.min(score, 100);
+            document.getElementById('scoreFill').style.width = score + '%';
+            document.getElementById('scoreLabel').textContent = 'Score: ' + score;
+            document.getElementById('matchPercent').textContent = score + '%';
+        }
+        document.querySelectorAll('#skills, #achievements, #experience').forEach(el => {
+            el.addEventListener('input', calculateScore);
+            el.addEventListener('change', calculateScore);
+        });
+        calculateScore();
+
+        // Simulated submit to job openings (integration with ATS)
+        document.getElementById('submitResume').addEventListener('click', function() {
+            alert('Resume submitted to Mastersolis Infotech careers page! (ATS integration simulated)');
+        });
+
+        // Multiple certifications logic
+        let certifications = [];
+        function renderCertificationsForm() {
+            const list = document.getElementById('certifications-list');
+            list.innerHTML = '';
+            certifications.forEach((cert, idx) => {
+                const certDiv = document.createElement('div');
+                certDiv.className = 'certification-entry';
+                certDiv.style.marginBottom = '16px';
+                certDiv.innerHTML = `
+                    <input type="text" placeholder="Certification Title" value="${cert.title || ''}" data-idx="${idx}" class="cert-title" style="margin-bottom:4px;">
+                    <input type="text" placeholder="Issuer" value="${cert.issuer || ''}" data-idx="${idx}" class="cert-issuer" style="margin-bottom:4px;">
+                    <input type="date" value="${cert.date || ''}" data-idx="${idx}" class="cert-date" style="margin-bottom:4px;">
+                    <input type="file" accept="image/*,.pdf" data-idx="${idx}" class="cert-media" style="margin-bottom:4px;">
+                    <button type="button" class="btn btn-secondary" data-idx="${idx}" style="margin-bottom:4px;">Remove</button>
+                    <div class="cert-media-preview" style="margin-top:4px;"></div>
+                `;
+                list.appendChild(certDiv);
+            });
+        }
+
+        document.getElementById('addCertification').addEventListener('click', function() {
+            certifications.push({ title: '', issuer: '', date: '', media: null, mediaUrl: '', mediaType: '' });
+            renderCertificationsForm();
+            updatePreview();
+        });
+
+        // Handle input changes for certifications
+
+        document.getElementById('certifications-list').addEventListener('input', function(e) {
+            const idx = parseInt(e.target.getAttribute('data-idx'));
+            if (e.target.classList.contains('cert-title')) certifications[idx].title = e.target.value;
+            if (e.target.classList.contains('cert-issuer')) certifications[idx].issuer = e.target.value;
+            if (e.target.classList.contains('cert-date')) certifications[idx].date = e.target.value;
+            updatePreview();
+        });
+
+        // Handle media upload for certifications
+
+        document.getElementById('certifications-list').addEventListener('change', function(e) {
+            const idx = parseInt(e.target.getAttribute('data-idx'));
+            if (e.target.classList.contains('cert-media')) {
+                const file = e.target.files[0];
+                if (!file) { certifications[idx].media = null; certifications[idx].mediaUrl = ''; certifications[idx].mediaType = ''; updatePreview(); return; }
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    certifications[idx].media = file;
+                    certifications[idx].mediaUrl = ev.target.result;
+                    certifications[idx].mediaType = file.type;
+                    // Show preview
+                    const previewDiv = e.target.parentElement.querySelector('.cert-media-preview');
+                    if (file.type.startsWith('image/')) {
+                        previewDiv.innerHTML = `<img src="${ev.target.result}" alt="Certificate" style="max-width:120px;max-height:120px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.08);" />`;
+                    } else if (file.type === 'application/pdf') {
+                        previewDiv.innerHTML = `<a href="${ev.target.result}" target="_blank" style="color:#2563eb;font-weight:600;">View PDF Certificate</a>`;
+                    } else {
+                        previewDiv.innerHTML = '';
+                    }
+                    updatePreview();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Remove certification
+
+        document.getElementById('certifications-list').addEventListener('click', function(e) {
+            if (e.target.textContent === 'Remove') {
+                const idx = parseInt(e.target.getAttribute('data-idx'));
+                certifications.splice(idx, 1);
+                renderCertificationsForm();
+                updatePreview();
+            }
+        });
+
+        // Update resume preview to show all certifications
+        const originalUpdatePreview = updatePreview;
+        updatePreview = function() {
+            // ...existing code for other fields...
+            // Multiple certifications section
+            let certSection = '';
+            if (certifications.length > 0) {
+                certSection = `<h4>Certifications</h4>`;
+                certifications.forEach(cert => {
+                    let mediaPreview = '';
+                    if (cert.mediaUrl && cert.mediaType) {
+                        if (cert.mediaType.startsWith('image/')) {
+                            mediaPreview = `<img src="${cert.mediaUrl}" alt="Certificate" style="max-width:120px;max-height:120px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-top:4px;" />`;
+                        } else if (cert.mediaType === 'application/pdf') {
+                            mediaPreview = `<a href="${cert.mediaUrl}" target="_blank" style="color:#2563eb;font-weight:600;">View PDF Certificate</a>`;
+                        }
+                    }
+                    certSection += `<p><strong>${cert.title || ''}</strong> ${cert.issuer ? 'by ' + cert.issuer : ''} ${cert.date ? '(' + cert.date + ')' : ''}<br>${mediaPreview}</p>`;
+                });
+            }
+            // ...existing code for previewHTML...
+            originalUpdatePreview.apply(this, arguments);
+            // Insert certSection into the preview
+            const preview = document.getElementById('resumePreview');
+            if (preview && certSection) {
+                preview.innerHTML += certSection;
+            }
+        }
+        renderCertificationsForm();
+    }
+    </script>
+</body>
+</html>

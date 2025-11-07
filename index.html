@@ -6,6 +6,7 @@
     <title>Mastersolis Infotech - AI-Powered Solutions</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.99/build/spline-viewer.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -19,7 +20,8 @@
                     <li><a href="./mastersolis-website/services.html">Services</a></li>
                     <li><a href="./mastersolis-website/projects.html">Projects</a></li>
                     <li><a href="./mastersolis-website/contacts.html">Contact</a></li>
-                    <li><a href="./mastersolis-website/admin/login.html" class="admin-link">Admin</a></li>
+                    <li><a href="./mastersolis-website/resume.html">Resume Builder</a></li>
+                    <li><a href="./admin/login.html" class="admin-link">Admin</a></li>
                 </ul>
                 <div class="mobile-menu">
                     <i class="fas fa-bars"></i>
@@ -30,6 +32,8 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home" style="background-size:cover;background-position:center;transition:background-image 0.5s;">
+<spline-viewer class="bg" url="https://prod.spline.design/FZE8NWpT2hiJBDUG/scene.splinecode"></spline-viewer>
+
         <div class="container">
             <div class="hero-content">
                 <h1 id="dynamic-tagline" aria-live="polite" tabindex="0">Transforming Businesses with AI-Powered Solutions</h1>
@@ -37,12 +41,12 @@
 
                 <!-- Hero dynamic content generator -->
                 <div class="hero-generator" style="margin-top:16px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-                    <input id="heroPrompt" type="text" placeholder="Describe what you'd like (e.g. 'improve onboarding')" aria-label="Hero prompt" style="flex:1; min-width:200px; padding:8px; border-radius:4px; border:1px solid #ccc;" />
+                    <input style="z-index: 1; flex:1; min-width:200px; padding:8px; border-radius:4px; border:1px solid #ccc;" id="heroPrompt" type="text" placeholder="Describe what you'd like (e.g. 'improve onboarding')" aria-label="Hero prompt" />
                     <button id="heroGenerate" class="btn" style="padding:8px 12px;">Generate Hero Copy</button>
                     <button id="heroUseTagline" class="btn btn-secondary" style="padding:8px 12px;">Use as Tagline</button>
                 </div>
                 <div class="hero-btns" style="margin-top:24px;">
-                    <a href="./mastersolis-website/services.html" class="btn">Our Services</a>
+                    <a href="./mastersolis-website/services.html" class="btn" id="heroServicesLink">Our Services</a>
                         <button id="getStartedBtn" class="btn btn-secondary">Get Started</button>
                 </div>
             </div>
@@ -50,7 +54,7 @@
     </section>
 
     <!-- Featured Technologies Section: Rotating images from assets folder -->
-    <section class="featured-tech">
+    <!-- <section class="featured-tech">
         <div class="container" style="text-align:center;">
             <h2>Featured Technologies</h2>
             <div id="tech-image-wrapper" style="margin:24px auto; max-width:340px;">
@@ -58,7 +62,7 @@
                 <div id="tech-caption" style="margin-top:12px; font-size:1.2rem; font-weight:500;">AI Solutions</div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Services Highlights -->
     <section class="services-highlight">
@@ -113,6 +117,10 @@
                 </div>
                 <div class="ai-output" id="aiOutput">
                     Your AI-generated business solution will appear here...
+                </div>
+                <div id="aiLoader" style="display:none; margin-top:12px; text-align:center;">
+                    <i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#2563eb;"></i>
+                    <div>Generating solution...</div>
                 </div>
             </div>
         </div>
@@ -233,6 +241,72 @@
                 setBg(idx);
             }, 10000);
         })();
+    });
+    </script>
+    <script>
+    // AI Content Generator Demo with Gemini API and fallback
+    document.addEventListener('DOMContentLoaded', function() {
+        const aiPrompt = document.getElementById('aiPrompt');
+        const generateBtn = document.getElementById('generateContent');
+        const aiOutput = document.getElementById('aiOutput');
+        const aiLoader = document.getElementById('aiLoader');
+        let isGenerating = false;
+        function showLoader(show) {
+            aiLoader.style.display = show ? 'block' : 'none';
+            aiOutput.style.display = show ? 'none' : 'block';
+        }
+        function localDemoAnswers(prompt) {
+            // Generate 3 sample answers for demo
+            return [
+                `Solution 1: For "${prompt}", our AI recommends a data-driven approach to maximize results.`,
+                `Solution 2: "${prompt}" can be solved with automation and smart analytics.`,
+                `Solution 3: Innovative strategies for "${prompt}" include cloud integration and AI-powered insights.`
+            ];
+        }
+        async function generateAIContent() {
+            if (isGenerating) return;
+            const prompt = aiPrompt.value.trim();
+            if (!prompt) return;
+            isGenerating = true;
+            showLoader(true);
+            generateBtn.disabled = true;
+            aiPrompt.disabled = true;
+            let solution = '';
+            let usedGemini = true;
+            try {
+                // Use local backend proxy for Gemini API
+                const response = await fetch('http://localhost:3001/api/gemini', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt })
+                });
+                const data = await response.json();
+                if (data.candidates && data.candidates.length > 0) {
+                    solution = data.candidates.map((c, i) => `<div style='margin-bottom:12px;'><strong>Solution ${i+1}:</strong> ${c.content.parts.map(p => p.text).join('')}</div>`).join('');
+                } else {
+                    usedGemini = false;
+                }
+            } catch (err) {
+                usedGemini = false;
+            }
+            if (!usedGemini) {
+                // Fallback to local demo answers
+                const answers = localDemoAnswers(prompt);
+                solution = answers.map((ans, i) => `<div style='margin-bottom:12px;'><strong>${ans}</strong></div>`).join('');
+                solution += `<div style='color:#e11d48;font-size:0.95em;margin-top:8px;'>Note: Solution not generated by Gemini API.</div>`;
+            }
+            aiOutput.innerHTML = solution;
+            showLoader(false);
+            generateBtn.disabled = false;
+            aiPrompt.disabled = false;
+            isGenerating = false;
+        }
+        generateBtn.addEventListener('click', generateAIContent);
+        aiPrompt.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                generateAIContent();
+            }
+        });
     });
     </script>
 </body>
