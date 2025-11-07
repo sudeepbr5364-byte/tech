@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Mastersolis Infotech</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Mastersolis<span>Infotech</span></a>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./services.html" class="active">Services</a></li>
+                    <li><a href="./projects.html">Projects</a></li>
+                    <li><a href="./contacts.html">Contact</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Our Services</h1>
+            <p>AI-powered solutions for your business transformation</p>
+        </div>
+    </section>
+
+    <section class="services-detailed">
+        <div class="container">
+            <div class="services-filter">
+                <button class="filter-btn active" data-filter="all">All Services</button>
+                <button class="filter-btn" data-filter="ai">AI Solutions</button>
+                <button class="filter-btn" data-filter="web">Web Development</button>
+                <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+                <button class="filter-btn" data-filter="cloud">Cloud Solutions</button>
+            </div>
+            
+            <!-- Service suggestions: shows 4 random recommendations and rotates on a timer -->
+            <div id="service-suggestions" class="service-suggestions" style="margin-bottom:18px; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px;">
+                <!-- JS will populate 4 suggested services here -->
+            </div>
+
+            <div class="services-grid-detailed" id="services-container">
+                <!-- AI-generated services will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chatbot -->
+    <div class="ai-chatbot">
+        <div class="chatbot-toggle">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="chatbot-window">
+            <div class="chatbot-header">
+                <h4>AI Assistant</h4>
+                <button class="chatbot-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    <p>Hello! I'm your AI assistant. How can I help you with our services today?</p>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" placeholder="Ask about our services..." id="chatbotInput">
+                <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <!-- Same footer as index.html -->
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/ai-content.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/chatbot.js"></script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Mastersolis Infotech</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Mastersolis<span>Infotech</span></a>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./services.html">Services</a></li>
+                    <li><a href="./projects.html">Projects</a></li>
+                    <li><a href="./contacts.html" class="active">Contact</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>Get in touch with our AI experts</p>
+        </div>
+    </section>
+
+    <section class="contact-page">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>123 Tech Park, Innovation Road<br>Bangalore, India 560001</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+91 98765 43210</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@mastersolisinfotech.com</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm">
+                    <h3>Send us a Message</h3>
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                        <input type="hidden" id="userEmail" name="userEmail">
+                    <div class="form-group">
+                        <input type="text" id="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <select id="service" required>
+                            <option value="">Select Service</option>
+                            <option value="ai">AI Solutions</option>
+                            <option value="web">Web Development</option>
+                            <option value="mobile">Mobile Apps</option>
+                            <option value="cloud">Cloud Solutions</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+                    <div id="contactStatus" style="margin-top:16px;"></div>
+                </div>
+            </div>
+        </section>
+        <script>
+        // Only allow logged-in users to submit
+        document.addEventListener('DOMContentLoaded', function() {
+            function updateFormUser() {
+                const user = window.Auth && window.Auth.getCurrentUser ? window.Auth.getCurrentUser() : null;
+                const emailInput = document.getElementById('email');
+                const nameInput = document.getElementById('name');
+                if (user) {
+                    emailInput.value = user.email;
+                    nameInput.value = user.name || user.email.split('@')[0];
+                    emailInput.readOnly = true;
+                    nameInput.readOnly = false;
+                } else {
+                    emailInput.value = '';
+                    nameInput.value = '';
+                    emailInput.readOnly = false;
+                    nameInput.readOnly = false;
+                }
+            }
+            updateFormUser();
+            document.addEventListener('ms-auth-changed', updateFormUser);
+
+            document.getElementById('contactForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const user = window.Auth && window.Auth.getCurrentUser ? window.Auth.getCurrentUser() : null;
+                if (!user) {
+                    document.getElementById('contactStatus').textContent = 'Please sign in to submit the contact form.';
+                    return;
+                }
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const message = document.getElementById('message').value.trim();
+                if (!name || !email || !message) {
+                    document.getElementById('contactStatus').textContent = 'All fields are required.';
+                    return;
+                }
+                document.getElementById('contactStatus').textContent = 'Sending...';
+                try {
+                    const res = await fetch('http://localhost:3001/api/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, email, message })
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        showContactPopup('Message sent! Check your email for a response.', true);
+                        document.getElementById('contactForm').reset();
+                        updateFormUser();
+                    } else {
+                        showContactPopup('Error: ' + (data.error || 'Unknown error'), false);
+                    }
+                } catch (err) {
+                    showContactPopup('Network error.', false);
+                }
+    // Popup modal for contact status
+    function showContactPopup(msg, success) {
+        let modal = document.getElementById('contact-popup-modal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'contact-popup-modal';
+            modal.style.position = 'fixed';
+            modal.style.inset = '0';
+            modal.style.display = 'flex';
+            modal.style.alignItems = 'center';
+            modal.style.justifyContent = 'center';
+            modal.style.background = 'rgba(0,0,0,.3)';
+            modal.style.zIndex = '99999';
+            document.body.appendChild(modal);
+        }
+        modal.innerHTML = `
+            <div style="background:#fff;padding:24px 32px;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.2);min-width:260px;text-align:center;">
+                <div style="font-size:2rem;margin-bottom:8px;">${success ? '✅' : '❌'}</div>
+                <div style="margin-bottom:16px;">${msg}</div>
+                <button id="contact-popup-close" class="btn btn-primary">OK</button>
+            </div>
+        `;
+        modal.style.display = 'flex';
+        setTimeout(function() {
+            const closeBtn = document.getElementById('contact-popup-close');
+            if (closeBtn) {
+                closeBtn.onclick = function() {
+                    modal.style.display = 'none';
+                };
+            }
+        }, 10);
+    }
+            });
+        });
+        </script>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <!-- Same footer as index.html -->
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/contact.js"></script>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    emailjs.init('5NtG-inVIkBbUAfCd'); // Replace with your EmailJS user ID
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const subject = document.getElementById('subject').value.trim();
+        const service = document.getElementById('service').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        if (!name || !email || !message) {
+            showContactPopup('All fields are required.', false);
+            return;
+        }
+
+        // Send email via EmailJS
+        emailjs.send('service_pq3g63b', 'template_a67mwff', {
+            to_email: email,
+            to_name: name,
+            from_name: 'Mastersolis Infotech',
+            from_email: 'sudeep9242123@gmail.com',
+            subject: subject,
+             service: service,
+            message: message
+        }).then(function(response) {
+            showContactPopup('Message sent! Check your email for a response.', true);
+            document.getElementById('contactForm').reset();
+        }, function(error) {
+            showContactPopup('Error sending email: ' + error.text, false);
+        });
+    });
+
+    // ...existing showContactPopup function...
+});
+</script>
+</body>
+</html>

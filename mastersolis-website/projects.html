@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects - Mastersolis Infotech</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Mastersolis<span>Infotech</span></a>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./services.html">Services</a></li>
+                    <li><a href="./projects.html" class="active">Projects</a></li>
+                    <li><a href="./contacts.html">Contact</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Our Projects</h1>
+            <p>Showcasing our innovative AI-powered solutions</p>
+        </div>
+    </section>
+
+    <section class="projects">
+        <div class="container">
+            <div class="projects-filter">
+                <div class="search-box">
+                    <input type="text" placeholder="Search projects..." id="projectSearch">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="tag-filter">
+                    <button class="tag-btn active" data-tag="all">All</button>
+                    <button class="tag-btn" data-tag="ai">AI/ML</button>
+                    <button class="tag-btn" data-tag="web">Web App</button>
+                    <button class="tag-btn" data-tag="mobile">Mobile</button>
+                    <button class="tag-btn" data-tag="cloud">Cloud</button>
+                    <button class="tag-btn" data-tag="data">Data Analytics</button>
+                </div>
+            </div>
+            
+            <div class="projects-grid" id="projects-container">
+                <!-- Projects will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <!-- Same footer as index.html -->
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/projects.js"></script>
+</body>
+</html>

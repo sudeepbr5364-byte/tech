@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastersolis Infotech - AI-Powered Solutions</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Mastersolis<span>Infotech</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="./mastersolis-website/about.html">About</a></li>
+                    <li><a href="./mastersolis-website/services.html">Services</a></li>
+                    <li><a href="./mastersolis-website/projects.html">Projects</a></li>
+                    <li><a href="./mastersolis-website/contacts.html">Contact</a></li>
+                    <li><a href="./mastersolis-website/admin/login.html" class="admin-link">Admin</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home" style="background-size:cover;background-position:center;transition:background-image 0.5s;">
+        <div class="container">
+            <div class="hero-content">
+                <h1 id="dynamic-tagline" aria-live="polite" tabindex="0">Transforming Businesses with AI-Powered Solutions</h1>
+                <p id="ai-generated-content">Loading AI-powered content...</p>
+
+                <!-- Hero dynamic content generator -->
+                <div class="hero-generator" style="margin-top:16px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                    <input id="heroPrompt" type="text" placeholder="Describe what you'd like (e.g. 'improve onboarding')" aria-label="Hero prompt" style="flex:1; min-width:200px; padding:8px; border-radius:4px; border:1px solid #ccc;" />
+                    <button id="heroGenerate" class="btn" style="padding:8px 12px;">Generate Hero Copy</button>
+                    <button id="heroUseTagline" class="btn btn-secondary" style="padding:8px 12px;">Use as Tagline</button>
+                </div>
+                <div class="hero-btns" style="margin-top:24px;">
+                    <a href="./mastersolis-website/services.html" class="btn">Our Services</a>
+                        <button id="getStartedBtn" class="btn btn-secondary">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Technologies Section: Rotating images from assets folder -->
+    <section class="featured-tech">
+        <div class="container" style="text-align:center;">
+            <h2>Featured Technologies</h2>
+            <div id="tech-image-wrapper" style="margin:24px auto; max-width:340px;">
+                <img id="tech-image" src="assets/AI.avif" alt="AI Solutions" style="width:100%; max-width:320px; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.12); transition:opacity 0.5s;" />
+                <div id="tech-caption" style="margin-top:12px; font-size:1.2rem; font-weight:500;">AI Solutions</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Highlights -->
+    <section class="services-highlight">
+        <div class="container">
+            <h2>Our AI-Powered Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Solutions</h3>
+                    <p>Intelligent systems that learn and adapt to your business needs</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>Modern, responsive websites with cutting-edge technology</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Apps</h3>
+                    <p>Native and cross-platform mobile applications</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>What Our Clients Say</h2>
+            <div class="testimonials-grid" id="testimonials-container">
+                <!-- AI-generated testimonials will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Content Generator Demo -->
+    <section class="ai-demo">
+        <div class="container">
+            <h2>Experience Our AI Power</h2>
+            <div class="ai-generator">
+                <div class="ai-input-group">
+                    <input type="text" class="ai-input" placeholder="Describe what you need..." id="aiPrompt">
+                    <button class="ai-generate-btn" id="generateContent">
+                        <i class="fas fa-magic"></i> Generate Solution
+                    </button>
+                </div>
+                <div class="ai-output" id="aiOutput">
+                    Your AI-generated business solution will appear here...
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Mastersolis Infotech</h3>
+                    <p>Transforming businesses with innovative AI-powered solutions.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="./mastersolis-website/about.html">About</a></li>
+                        <li><a href="./mastersolis-website/services.html">Services</a></li>
+                        <li><a href="./mastersolis-website/projects.html">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="./mastersolis-website/services.html">AI Solutions</a></li>
+                        <li><a href="./mastersolis-website/services.html">Web Development</a></li>
+                        <li><a href="./mastersolis-website/services.html">Mobile Apps</a></li>
+                        <li><a href="./mastersolis-website/services.html">Cloud Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> info@mastersolis.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Bangalore, India</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Mastersolis Infotech. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/ai-content.js"></script>
+        <script src="js/auth.js"></script>
+
+    <!-- Rotating taglines: show one sentence every 15 seconds; pause on hover or focus -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Rotating taglines
+        (function(){
+            const taglines = [
+                "Transforming Businesses with AI-Powered Solutions",
+                "Accelerate growth with smart automation",
+                "Build scalable web and mobile applications",
+                "Turn data into actionable insights",
+                "Secure, reliable cloud-native architectures"
+            ];
+            const el = document.getElementById('dynamic-tagline');
+            if (!el) return;
+            let index = taglines.indexOf(el.textContent.trim());
+            if (index === -1) index = 0;
+            const INTERVAL_MS = 15000;
+            let timer = null;
+            function show(i){ el.textContent = taglines[i]; }
+            function start(){
+                if (timer) return;
+                timer = setInterval(()=>{
+                    index = (index + 1) % taglines.length;
+                    show(index);
+                }, INTERVAL_MS);
+            }
+            function stop(){
+                if (!timer) return;
+                clearInterval(timer);
+                timer = null;
+            }
+            el.addEventListener('mouseenter', stop);
+            el.addEventListener('mouseleave', start);
+            el.addEventListener('focus', stop);
+            el.addEventListener('blur', start);
+            show(index);
+            start();
+        })();
+        // Rotating hero background images every 10 seconds
+        (function(){
+            const images = [
+                'assets/AI.avif',
+                'assets/web.avif',
+                'assets/mobile.avif',
+                'assets/cloud.avif'
+            ];
+            let idx = 0;
+            const heroEl = document.getElementById('home');
+            if (!heroEl) return;
+            function setBg(i) {
+                // Check if image exists before setting
+                fetch(images[i], { method: 'HEAD' })
+                    .then(resp => {
+                        if (resp.ok) {
+                            heroEl.style.backgroundImage = `url('${images[i]}')`;
+                        }
+                    });
+            }
+            setBg(idx);
+            setInterval(() => {
+                idx = (idx + 1) % images.length;
+                setBg(idx);
+            }, 10000);
+        })();
+    });
+    </script>
+</body>
+</html>
